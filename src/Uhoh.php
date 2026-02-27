@@ -14,7 +14,7 @@ class Uhoh {
 
     public function run() {
 
-        $publicIndex = config('uhoh.index_file_path',  public_path('index.php'));
+        $publicIndex = config('uhoh.index_file_path') ?? public_path('index.php');
 
         if(! File::exists($publicIndex)) {
             event(new IntegrityCheckFailed("Index file not found at $publicIndex."));
