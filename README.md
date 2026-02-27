@@ -20,21 +20,6 @@ You can publish the config file with:
 php artisan vendor:publish --tag="laravel-uhoh-config"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-    'enabled' => env("UHOH_ENABLED", "true"),
-
-    'index_file_path' => env("UHOH_INDEX_FILE_PATH"), // defaults to public_path('index.php')
-    
-    'checksums' => [
-        // versions 10, 11 ,12 already included
-    ]
-];
-
-```
-
 ## Usage
 
 ```php
@@ -45,6 +30,14 @@ You can also add this to your schedule
 ```php
 \Illuminate\Support\Facades\Schedule::command('uhoh:check')->hourly();
 ```
+## Creating a Listener
+The package does not include built-in notifications by default.
+However, it fires two events that you can listen to in your application:
+```php
+\TheCapybaRalph\LaravelUhoh\Events\IntegrityCheckFailed::class;
+\TheCapybaRalph\LaravelUhoh\Events\IntegrityCheckPassed::class;
+```
+You can attach listeners to these events to perform any action you need when an integrity check passes or fails, such as sending notifications, logging, or triggering custom workflows.
 
 ## Testing
 
